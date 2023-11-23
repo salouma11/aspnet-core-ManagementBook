@@ -1,0 +1,139 @@
+﻿@page "/SaveLivre"
+@page "/SaveLivre/{id:int}"
+
+@using ManagementBooks.Classes.Models;
+@using ManagementBooks.Client.Services.LivreService;
+@using ManagementBooks.Client.Services.AuteurService;
+@using ManagementBooks.Client.Services.CategorieService;
+@inject ILivreService livreservice
+@inject IAuteurService auteurservice
+
+@inject ICategorieService categorieservices
+
+<MudText Typo="Typo.h4" Align="Align.Center"><b>Add Livre </b> </MudText>
+
+<MudText Typo="Typo.h4" Align="Align.Center"><b>islem </b> </MudText>
+
+<EditForm Model="@livre" OnValidSubmit="AddLivreWithCategories">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+      
+        <MudTextField Label="Nom Livre" id="Name" @bind-Value="livre.NameLiv" Required="true" RequiredError="User name is required!" />
+        <ValidationMessage For="() => livre.NameLiv" />
+        
+    </div>
+
+    <div class="form-group">
+
+        <MudSelect Dense="true" Label="Select Auteur" Variant="Variant.Text" @bind-Value="livre.AuteurId">
+
+            @foreach (var auteur in auteurs)
+            {
+                <MudSelectItem Value="@auteur.Id">@auteur.NameAut</MudSelectItem>
+            }
+        </MudSelect>
+        <ValidationMessage For="@(() => livre.AuteurId)" />
+
+    </div>
+
+    <div class="form-group">
+        <MudSelect Label="Select Categories" MultiSelection="true" @bind-SelectedValues="CategoLivres">
+            @foreach (var cat in categories)
+            {
+                <MudSelectItem Value="@cat.Id">@cat.NameCat</MudSelectItem>
+            }
+            <!-- Add more items as needed -->
+        </MudSelect>
+    </div>
+
+    @{
+      
+        if (livre.ContenueLivre == null)
+        {
+            livre.ContenueLivre = new ContenueLivre();
+        }
+    }
+
+    <br /> <br /> <br />
+
+    <div class="form-group">
+        
+        <MudTextField Label="Nom Livre" id="Name" @bind-Value="livre.ContenueLivre.NbrPages" Required="true" RequiredError="User name is required!" />
+        
+        <ValidationMessage For="@(() => livre.ContenueLivre.NbrPages)" />
+    </div>
+
+
+    
+    <br /> <br />
+
+    <div class="form-group">
+        <MudTextField Label="Nom Livre" id="Name" @bind-Value="livre.ContenueLivre.Contenue" Required="true" RequiredError="User name is required!" Lines="10" />
+        
+        <ValidationMessage For="@(() => livre.ContenueLivre.Contenue)" />
+    </div>
+    <br /> <br /> <br /> <br />
+    <button type="submit" class="btn btn-primary">@((livre.Id == 0) ? "Add Book" : "Update Book")</button>
+</EditForm>
+
+
+
+@code {
+
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    private Livre livre ;
+
+    private List<Categorie> categories { get; set; } = new List<Categorie>();
+
+
+
+    IEnumerable<int> CategoLivres { get; set; }
+
+    public List<Auteur> auteurs { get; set; } = new List<Auteur>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        livre = new Livre();
+
+        categories = await categorieservices.GetAllCategories();
+        auteurs = await auteurservice.GetAllAuteurs();
+        CategoLivres = livre.CategoLivres?.Select(c => c.CategorieId).ToList() ?? new List<int>();
+
+        if (@id != 0) 
+        {
+            livre= await livreservice.GetLivreById(id);
+            
+            CategoLivres = livre.CategoLivres.Select(c => c.CategorieId).ToList();
+           
+
+        }
+
+    }
+
+    private async Task AddLivreWithCategories()
+    {
+
+        if (livre.Id == 0)
+        {
+            livre.CategoLivres = CategoLivres.Select(categoryId => new CatLivr(livre.Id, categoryId)).ToList();
+            await livreservice.AddLivreWithAll(livre);
+        }
+        else
+        {
+            livre.CategoLivres = CategoLivres.Select(categoryId => new CatLivr(livre.Id, categoryId)).ToList();
+            await livreservice.UpdateLivreWithCategoriesAsync(livre);   
+        }
+      
+
+    }
+
+
+}
+
+

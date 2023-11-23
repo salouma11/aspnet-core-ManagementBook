@@ -1,0 +1,81 @@
+﻿@page "/AddAuteur"
+@page "/AddAuteur/{id:int}"
+@using ManagementBooks.Classes.Models;
+@using ManagementBooks.Client.Services.AuteurService;
+@inject IAuteurService auteurservice
+
+
+
+@if (id != 0)
+{
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Update Auteur</b> </MudText>
+
+}
+else
+{
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Add Auteur </b> </MudText>
+
+}
+
+<MudGrid>
+    <MudItem xs="14" sm="12">
+        <MudPaper Class="pa-4">
+            <EditForm Model="@auteur" OnValidSubmit="CreateAuteur">
+                <DataAnnotationsValidator />
+
+                <MudTextField Label="Name" id="Name" @bind-Value="auteur.NameAut" Required="true" RequiredError="User name is required!" />
+                <ValidationMessage For="() => auteur.NameAut" />
+
+                    <br /> <br />
+                <button type="submit" class="btn btn-primary">@((auteur.Id == 0) ? "Add Auteur" : "Update Auteur")</button>
+
+                <br /> <br />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">@((auteur.Id == 0) ? "Add Auteur" : "Update Auteur")</MudButton>
+                
+            </EditForm>
+        </MudPaper>
+
+    </MudItem>
+
+</MudGrid>
+
+    @code {
+
+    [Parameter]
+    public int id { get; set; } 
+
+    Auteur auteur = new Auteur();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+
+        if (firstRender)
+        {
+
+            if (@id != 0) 
+            {
+                auteur = await auteurservice.GetAuteurById(id); // Populate the book for editing
+            }
+
+            StateHasChanged();
+        }
+
+    }
+
+    private async Task CreateAuteur()
+    {
+
+
+        if (auteur.Id == 0)
+        {
+            await auteurservice.AddAuteur(auteur);
+        }
+        else
+        {
+            await auteurservice.UpdateAuteur(auteur);
+        }
+
+    }
+
+}

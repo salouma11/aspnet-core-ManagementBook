@@ -1,0 +1,96 @@
+﻿@page "/AuteurList"
+@using ManagementBooks.Classes.Models;
+@using ManagementBooks.Client.Services.AuteurService;
+
+@inject IAuteurService AuteurService
+@inject NavigationManager navigationManage
+@inject IDialogService dialog
+
+@if(Auteurs.Count==0)
+{
+    <h2> loading...... </h2>
+}
+
+else
+{
+    <MudText Typo="Typo.h3" Align="Align.Center"><b>Liste des auteurs</b> </MudText>
+
+    <MudContainer>
+    <MudRow JustifyContent="JustifyContent.End">
+        <MudCol Class="col-auto">
+            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary" Link="/AddAuteur">Add New</MudButton>
+        </MudCol>
+    </MudRow>
+</MudContainer>
+
+
+    <MudTable Items="Auteurs" TItem="Author">
+        <HeaderContent>
+            @* <MudTh></MudTh> *@
+            <MudTh>Autor Name</MudTh>
+            <MudTh></MudTh>
+            <MudTh></MudTh>
+
+            <MudTh></MudTh>
+            <!-- Add other headers as needed -->
+        </HeaderContent>
+        <RowTemplate>
+            @* <MudTd>@context.Id</MudTd> *@
+            <MudTd>@context.NameAut</MudTd>
+            
+            <MudTh>
+                <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Update" aria-label="update" OnClick="@(() => EditAut(context))"></MudIconButton>
+                
+            </MudTh>
+            <MudTh>
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="@(() => DeletetAut(context))"></MudIconButton>
+               
+            </MudTh>
+
+            <MudTh>
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Book" aria-label="delete" OnClick="@((e) => OpenDialog(maxWidth))"></MudIconButton>
+
+            </MudTh>
+        
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    public List<Auteur> Auteurs { get; set; } = new List<Auteur>();
+   
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            
+            Auteurs = await AuteurService.GetAllAuteurs();
+
+            StateHasChanged();
+        }
+
+    }
+
+    void EditAut(Auteur aut)
+    {
+        navigationManage.NavigateTo($"/AddAuteur/{aut.Id}");
+
+    }
+
+    void DeletetAut(Auteur aut)
+    {
+        navigationManage.NavigateTo($"/AuteurDelete/{aut.Id}");
+
+    }
+
+    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+
+    private void OpenDialog(DialogOptions options)
+    {
+        dialog.Show<Dialog>("Custom Options Dialog", options);
+    }
+    
+
+}

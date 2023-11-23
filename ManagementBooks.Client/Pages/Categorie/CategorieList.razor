@@ -1,0 +1,84 @@
+﻿@page "/CategorieList"
+
+@using ManagementBooks.Classes.Models;
+@using ManagementBooks.Client.Services.CategorieService;
+@inject NavigationManager navigationManage
+
+@inject ICategorieService _categorieService
+
+
+ @if(categories.Count==0)
+{
+    <h2> loading...... </h2>
+}
+
+else
+{ 
+    <MudText Typo="Typo.h3" Align="Align.Center"><b>Liste des Catgories</b> </MudText>
+
+    <MudContainer>
+    <MudRow JustifyContent="JustifyContent.End">
+        <MudCol Class="col-auto">
+                <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary" Link="/CategorieSave">Add New</MudButton>
+        </MudCol>
+    </MudRow>
+</MudContainer>
+
+
+    <MudTable Items="categories" >
+        <HeaderContent>
+            @* <MudTh></MudTh> *@
+            <MudTh>Autor Name</MudTh>
+            <MudTh></MudTh>
+            <MudTh></MudTh>
+            <!-- Add other headers as needed -->
+        </HeaderContent>
+        <RowTemplate>
+            @* <MudTd>@context.Id</MudTd> *@
+            <MudTd>@context.NameCat</MudTd>
+            
+            <MudTh>
+                <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Update" aria-label="Update" OnClick="@(() => EditCat(context))"></MudIconButton>
+                
+            </MudTh>
+            <MudTh>
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="@(() => DeleteCat(context))"></MudIconButton>
+            </MudTh>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    public List<Categorie> categories { get; set; } = new List<Categorie>();
+   
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            
+            categories = await _categorieService.GetAllCategories();
+
+            StateHasChanged();
+        }
+
+    }
+
+    void EditCat(Categorie cat)
+    {
+        navigationManage.NavigateTo($"/CategorieSave/{cat.Id}");
+         
+    }
+
+    void DeleteCat(Categorie cat)
+    {
+        navigationManage.NavigateTo($"/CategorieDelete/{cat.Id}");
+
+
+    }
+
+  
+
+
+}

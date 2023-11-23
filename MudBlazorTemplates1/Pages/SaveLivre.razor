@@ -1,0 +1,71 @@
+﻿@page "/SaveLivre"
+
+
+@using ManagementBooks.Classes.Models;
+@using ManagementBooks.Client.Services.AuteurService;
+
+@using ManagementBooks.Client.Services.CategorieService;
+@using MudBlazorTemplates1.Service;
+@inject ILivreService livreservice
+@inject IAuteurService auteurservice
+
+@inject ICategorieService categorieservices
+
+
+<EditForm Model="@livre" OnValidSubmit="AddLivreWithCategories">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="NameLiv">Name:</label>
+        <InputText id="NameLiv" class="form-control" @bind-Value="livre.NameLiv" />
+        <ValidationMessage For="@(() => livre.NameLiv)" />
+    </div>
+
+    <MudSelect Dense="true" Label="Select Auteur" Variant="Variant.Text" @bind-Value="livre.AuteurId">
+        <MudSelectItem Value="-1">Remplir</MudSelectItem>
+        @foreach (var auteur in auteurs)
+        {
+            <MudSelectItem Value="@auteur.Id">@auteur.NameAut</MudSelectItem>
+        }
+    </MudSelect>
+    <ValidationMessage For="@(() => livre.AuteurId)" />
+
+    <!-- Add other Livre properties as needed -->
+
+    <div class="form-group">
+        <label for="CatSelected">Categories:</label>
+        <InputSelect id="CatSelected" class="form-control" @bind-Value="livre.AuteurId" multiple="true">
+            @foreach (var category in categories)
+            {
+                <option value="@category.Id">@category.NameCat</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => selectedCategory)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Livre</button>
+</EditForm>
+
+@code {
+    private Livre livre = new Livre();  // Initialize with default values
+    private List<Categorie> categories = new List<Categorie>();  // Assuming you have a list of categories
+    private List<int> selectedCategory = new List<int>();
+
+    public List<Auteur> auteurs { get; set; } = new List<Auteur>();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await categorieservices.GetAllCategories();
+        auteurs = await auteurservice.GetAllAuteurs();
+    }
+
+    private async Task AddLivreWithCategories()
+    {
+        await livreservice.AddLivreCat(livre, selectedCategory);
+
+
+    }
+}
+

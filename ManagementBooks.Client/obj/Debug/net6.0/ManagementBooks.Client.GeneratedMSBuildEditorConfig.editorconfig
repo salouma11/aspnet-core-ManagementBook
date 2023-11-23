@@ -1,0 +1,85 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = ManagementBooks.Client
+build_property.RootNamespace = ManagementBooks.Client
+build_property.ProjectDir = C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Auteurs/AddAuteur.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0ZXVyc1xBZGRBdXRldXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Auteurs/AuteurDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0ZXVyc1xBdXRldXJEZWxldGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Auteurs/AuteurList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0ZXVyc1xBdXRldXJMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Categorie/CategorieDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmllXENhdGVnb3JpZURlbGV0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Categorie/CategorieList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmllXENhdGVnb3JpZUxpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Categorie/CategorieSave.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmllXENhdGVnb3JpZVNhdmUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Livre/DeleteLivre.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGl2cmVcRGVsZXRlTGl2cmUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Livre/LiveList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGl2cmVcTGl2ZUxpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Pages/Livre/SaveLivre.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGl2cmVcU2F2ZUxpdnJlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Islem/source/repos2022/ManagementBooks/ManagementBooks.Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

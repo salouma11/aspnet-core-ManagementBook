@@ -1,0 +1,45 @@
+﻿@page "/DeleteLivre/{id:int}"
+@using ManagementBooks.Client.Services.LivreService;
+@inject ILivreService livreservice
+
+@using ManagementBooks.Classes.Models;
+
+@if (livre != null)
+{
+    <MudTd><MudText Typo="Typo.body2">@livre.NameLiv</MudText></MudTd>
+    <MudTd><MudText Typo="Typo.body2">@livre.Auteur.NameAut</MudText></MudTd>
+    <MudTd><MudText Typo="Typo.body2">@livre.AuteurId</MudText></MudTd>
+
+    <MudCardActions>
+        <div style="text-align: center;" class="form-group">
+            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => DelLivre(livre.Id))">Delete</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="/LivreList">Back </MudButton>
+        </div>
+    </MudCardActions>
+}
+else
+{
+    <p>Loading or Livre not found.</p>
+}
+
+@code {
+
+    Livre livre = new Livre();
+
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        livre = await livreservice.GetLivreById(id);
+    }
+
+    private async Task  DelLivre(int id)
+    {
+        await livreservice.DeleteLivre(id);
+    }
+
+}

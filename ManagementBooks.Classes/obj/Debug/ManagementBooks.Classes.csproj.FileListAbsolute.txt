@@ -1,0 +1,10 @@
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\bin\Debug\ManagementBooks.Classes.dll
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\bin\Debug\ManagementBooks.Classes.pdb
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\obj\Debug\ManagementBooks.Classes.csproj.AssemblyReference.cache
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\obj\Debug\ManagementBooks.Classes.csproj.CoreCompileInputs.cache
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\obj\Debug\ManagementBooks.Classes.csproj.CopyComplete
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\obj\Debug\ManagementBooks.Classes.dll
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\obj\Debug\ManagementBooks.Classes.pdb
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\bin\Debug\Microsoft.Analytics.Interfaces.dll
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\bin\Debug\Microsoft.Analytics.Interfaces.Streaming.dll
+C:\Users\Islem\source\repos2022\ManagementBooks\ManagementBooks.Classes\bin\Debug\Microsoft.Analytics.Types.dll

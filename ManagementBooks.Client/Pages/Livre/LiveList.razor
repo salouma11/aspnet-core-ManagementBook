@@ -1,0 +1,99 @@
+﻿@page "/LivreList"
+@using ManagementBooks.Classes.Models;
+@using ManagementBooks.Client.Services.LivreService;
+@inject NavigationManager navigationManage
+
+@inject ILivreService LivreService
+
+
+<h1>islem</h1>
+@if(Livres.Count==0)
+{
+  <MudProgressLinear Color="Color.Success" />
+}
+
+else
+{
+    <MudText Typo="Typo.h3" Align="Align.Center"><b>Liste des auteurs</b> </MudText>
+
+    <MudContainer>
+    <MudRow JustifyContent="JustifyContent.End">
+        <MudCol Class="col-auto">
+                <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary" Link="/SaveLivre">Add New</MudButton>
+        </MudCol>
+    </MudRow>
+</MudContainer>
+
+
+    <MudTable Items="Livres" TItem="Author">
+        <HeaderContent>
+            @* <MudTh></MudTh> *@
+            <MudTh>Autor Name</MudTh>
+            
+            <MudTh>Autor Name</MudTh>
+            <MudTh></MudTh>
+            <MudTh></MudTh>
+            <MudTh></MudTh>
+            <!-- Add other headers as needed -->
+        </HeaderContent>
+        <RowTemplate>
+            @* <MudTd>@context.Id</MudTd> *@
+            <MudTd>@context.NameLiv   </MudTd>
+            
+            <MudTh>@context.Auteur.NameAut</MudTh>
+
+            <MudTd>
+                <!-- Edit button -->
+                <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Update" aria-label="Update" OnClick="@(() => EditLivre(context))"></MudIconButton>
+                
+            </MudTd>
+
+            <MudTd>
+                <!-- Edit button -->
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="@(() => DeleteLivre(context))"></MudIconButton>
+
+            </MudTd>
+
+            <MudTd>
+                <!-- Edit button -->
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Details" aria-label="delete" OnClick="@(() => DeleteLivre(context))"></MudIconButton>
+
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    public List<Livre> Livres { get; set; } = new List<Livre>();
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+
+            Livres = await LivreService.GetAllLivres();
+
+            StateHasChanged();
+        }
+
+    }
+
+
+    void EditLivre(Livre livre)
+    {
+        navigationManage.NavigateTo($"/SaveLivre/{livre.Id}");
+
+    }
+   
+
+    void DeleteLivre(Livre livre)
+    {
+        navigationManage.NavigateTo($"/DeleteLivre/{livre.Id}");
+
+       
+    }
+
+
+}

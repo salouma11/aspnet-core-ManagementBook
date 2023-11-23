@@ -1,0 +1,80 @@
+﻿@page "/CategorieSave"
+@page "/CategorieSave/{id:int}"
+@using ManagementBooks.Classes.Models;
+@using ManagementBooks.Client.Services.CategorieService;
+@inject ICategorieService _categorieService;
+
+
+@if (id != 0)
+{
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Update Categorie</b> </MudText>
+
+}
+else
+{
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Add Categorie </b> </MudText>
+
+}
+
+
+<MudGrid>
+    <MudItem xs="14" sm="12">
+        <MudPaper Class="pa-4">
+            <EditForm Model="@cat" OnValidSubmit="Save">
+                <DataAnnotationsValidator />
+
+                <MudTextField Label="Name" id="Name" @bind-Value="cat.NameCat" Required="true" RequiredError="User name is required!" />
+                <ValidationMessage For="() => cat.NameCat" />
+
+                <br /> <br />
+                
+
+                <br /> <br />
+                <button type="submit" class="btn btn-primary">@((cat.Id == 0) ? "Add Book" : "Update Book")</button>
+
+            </EditForm>
+        </MudPaper>
+
+    </MudItem>
+
+</MudGrid>
+
+@code {
+    Categorie cat = new Categorie();
+    [Parameter]
+    public int id { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+
+        if (firstRender)
+        {
+
+            if (@id != 0) // Check if it's an edit operation
+            {
+                cat = await _categorieService.GetCategorieById(id); // Populate the book for editing
+            }
+
+            StateHasChanged();
+        }
+
+    }
+
+    private async Task Save()
+    {
+        
+        if (cat.Id == 0)
+        {
+             await _categorieService.AddCategorie(cat);
+        }
+        else
+        {
+            await _categorieService.UpdateCategorie(cat);
+        }
+
+    }
+
+   
+
+}

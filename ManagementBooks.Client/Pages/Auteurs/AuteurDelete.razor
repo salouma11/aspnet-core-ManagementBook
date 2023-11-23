@@ -1,0 +1,68 @@
+﻿@page "/AuteurDelete/{id:int}"
+@using ManagementBooks.Client.Services.AuteurService;
+@inject IAuteurService auteurservice
+@inject NavigationManager navigationManage
+
+@using ManagementBooks.Classes.Models;
+
+<h3>Delete Auteur</h3>
+<MudTd><MudText Typo="Typo.body2">@auteur.NameAut</MudText></MudTd>
+
+
+
+
+<MudCardActions>
+    <div style="text-align: center;" class="form-group">
+        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => DelCat(auteur.Id))" Enabled="string.IsNullOrEmpty(errorMessage)">Delete</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="/AuteurList">Back </MudButton>
+
+    </div>
+
+</MudCardActions>
+
+
+<p class="text-danger">@errorMessage</p>
+
+
+
+@code {
+
+    Auteur auteur = new Auteur();
+    private List<Auteur> auteurs;
+    private string errorMessage = string.Empty;
+
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        auteur = await auteurservice.GetAuteurById(id);
+    }
+
+
+
+
+    private async Task DelCat(int id)
+    {
+        auteurs = await auteurservice.DeleteAuteur(id);
+
+        if (auteurs == null)
+        {
+            errorMessage = "An error occurred during deletion.";
+        }
+        else if (auteurs.Count == 0)
+        {
+            errorMessage = "Auteur has associated Livres. Delete them first.";
+        }
+        else
+        {
+            navigationManage.NavigateTo("/AuteurList");
+        }
+
+        
+    }
+
+}

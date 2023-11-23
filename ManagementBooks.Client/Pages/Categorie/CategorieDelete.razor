@@ -1,0 +1,41 @@
+﻿@page "/CategorieDelete/{id:int}"
+@using ManagementBooks.Client.Services.CategorieService;
+@inject ICategorieService _categorieservice
+
+@using ManagementBooks.Classes.Models;
+
+<h3>Delete Categorie</h3>
+<MudTd><MudText Typo="Typo.body2">@cat.NameCat</MudText></MudTd>
+
+
+
+
+<MudCardActions>
+    <div style="text-align: center;" class="form-group">
+        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => DelCat(cat.Id))">Delete</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="/CategorieList">Back </MudButton>
+    </div>
+
+</MudCardActions>
+
+@code {
+
+    Categorie cat = new Categorie();
+
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        cat = await _categorieservice.GetCategorieById(id);
+    }
+
+    private async Task DelCat(int id)
+    {
+        await _categorieservice.DeleteCategorie(id);
+    }
+
+}
